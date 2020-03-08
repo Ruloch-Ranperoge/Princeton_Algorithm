@@ -6,10 +6,10 @@
       <change beforePath="$PROJECT_DIR$/8puzzle.zip" beforeDir="false" afterPath="$PROJECT_DIR$/8puzzle.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/8puzzle.zip" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/8puzzle.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/8puzzle.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Board.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$SearchNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$SearchNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -27,14 +27,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2208">
-              <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
+            <state relative-caret-position="1090">
+              <caret line="103" column="24" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2332#2333#0" expanded="true" />
                 <element signature="e#2429#2430#0" expanded="true" />
                 <element signature="e#2551#2552#0" expanded="true" />
-                <element signature="e#3372#3373#0" expanded="true" />
+                <element signature="e#3355#3356#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,8 +43,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
+            <state relative-caret-position="544">
+              <caret line="121" selection-start-line="121" selection-end-line="121" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#595#596#0" expanded="true" />
@@ -53,13 +53,13 @@
                 <element signature="e#714#715#0" expanded="true" />
                 <element signature="e#755#756#0" expanded="true" />
                 <element signature="e#791#792#0" expanded="true" />
-                <element signature="e#911#912#0" expanded="true" />
+                <element signature="e#929#930#0" expanded="true" />
                 <element signature="e#1691#1692#0" expanded="true" />
                 <element signature="e#1765#1766#0" expanded="true" />
-                <element signature="e#3835#3836#0" expanded="true" />
-                <element signature="e#3937#3938#0" expanded="true" />
-                <element signature="e#4053#4054#0" expanded="true" />
-                <element signature="e#4179#4180#0" expanded="true" />
+                <element signature="e#3690#3691#0" expanded="true" />
+                <element signature="e#3792#3793#0" expanded="true" />
+                <element signature="e#3908#3909#0" expanded="true" />
+                <element signature="e#4034#4035#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -223,6 +223,23 @@
     <entry file="file://$PROJECT_DIR$/puzzle04.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/puzzle07.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1090">
+          <caret line="103" column="24" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2332#2333#0" expanded="true" />
+            <element signature="e#2429#2430#0" expanded="true" />
+            <element signature="e#2551#2552#0" expanded="true" />
+            <element signature="e#3355#3356#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PuzzleChecker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="696">
@@ -230,27 +247,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/puzzle07.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2208">
-          <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2332#2333#0" expanded="true" />
-            <element signature="e#2429#2430#0" expanded="true" />
-            <element signature="e#2551#2552#0" expanded="true" />
-            <element signature="e#3372#3373#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="83" column="48" selection-start-line="83" selection-start-column="48" selection-end-line="83" selection-end-column="48" />
+        <state relative-caret-position="544">
+          <caret line="121" selection-start-line="121" selection-end-line="121" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#595#596#0" expanded="true" />
@@ -259,13 +259,13 @@
             <element signature="e#714#715#0" expanded="true" />
             <element signature="e#755#756#0" expanded="true" />
             <element signature="e#791#792#0" expanded="true" />
-            <element signature="e#911#912#0" expanded="true" />
+            <element signature="e#929#930#0" expanded="true" />
             <element signature="e#1691#1692#0" expanded="true" />
             <element signature="e#1765#1766#0" expanded="true" />
-            <element signature="e#3835#3836#0" expanded="true" />
-            <element signature="e#3937#3938#0" expanded="true" />
-            <element signature="e#4053#4054#0" expanded="true" />
-            <element signature="e#4179#4180#0" expanded="true" />
+            <element signature="e#3690#3691#0" expanded="true" />
+            <element signature="e#3792#3793#0" expanded="true" />
+            <element signature="e#3908#3909#0" expanded="true" />
+            <element signature="e#4034#4035#0" expanded="true" />
           </folding>
         </state>
       </provider>

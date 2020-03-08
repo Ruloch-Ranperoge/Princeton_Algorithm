@@ -1,19 +1,20 @@
 import edu.princeton.cs.algs4.MinPQ;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class Solver {
     private boolean solvebale;
     private final int cnt;
-    private List<Board> sol;
+    private final List<Board> sol;
 
     private class SearchNode {
         private final int moves;
         private final int priority;
-        private Board board;
-        private SearchNode prev;
+        private final Board board;
+        private final SearchNode prev;
 
         public SearchNode(int movesPara, Board boardPara, SearchNode prevPara) {
             moves = movesPara;
@@ -41,7 +42,7 @@ public class Solver {
         public Iterable<SearchNode> getNeighborNodes() {
             List<SearchNode> res = new ArrayList<>();
             for (Board neigh:board.neighbors()) {
-                if ( prev == null || !neigh.equals(prev.getBoard())) {
+                if (prev == null || !neigh.equals(prev.getBoard())) {
                     res.add(new SearchNode(moves + 1, neigh, this));
                 }
             }
@@ -119,6 +120,7 @@ public class Solver {
 
     // sequence of boards in a shortest solution
     public Iterable<Board> solution() {
+        Collections.reverse(sol);
         return sol;
     }
 

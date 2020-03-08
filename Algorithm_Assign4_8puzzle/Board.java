@@ -100,10 +100,11 @@ public class Board {
     // does this board equal y?
     public boolean equals(Object y) {
         Board tmpY;
-        if (y.getClass() == Board.class)
-            tmpY = (Board) y;
-        else
+        if (y == null)
             return false;
+        else
+            tmpY = (Board) y;
+
         if (n != tmpY.dimension())
             return false;
         for (int i = 0; i < n; i++)
