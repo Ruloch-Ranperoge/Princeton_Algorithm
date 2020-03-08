@@ -19,9 +19,12 @@ public class Board {
         if (n != tiles[0].length) {
             throw new IllegalArgumentException("Row should be equal to column.");
         }
+
         mat = new int[n][n];
-        for (int i = 0; i < n; i++)
+
+        for (int i = 0; i < n; i++) {
             System.arraycopy(tiles[i], 0, mat[i], 0, tiles[i].length);
+        }
 
         hammingDis = 0;
         for (int i = 0; i < n; i++) {
@@ -35,7 +38,7 @@ public class Board {
         manhattanDis = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (mat[i][j] == 0)continue;
+                if (mat[i][j] == 0) continue;
                 tmpTarX = (mat[i][j] - 1)/n;
                 tmpTarY = (mat[i][j] - 1)%n;
                 manhattanDis += Math.abs(tmpTarX - i) + Math.abs(tmpTarY - j);
@@ -114,57 +117,57 @@ public class Board {
         mat[x2][y2] = tmp;
     }
     // all neighboring boards
-    public Iterable<Board> neighbors(){
+    public Iterable<Board> neighbors() {
         List<Board> neighborBoards = new ArrayList<>();
         int tmpX,tmpY;
         int [] tmpXs = {zeroIdxX - 1, zeroIdxX, zeroIdxX + 1, zeroIdxX};
         int [] tmpYs = {zeroIdxY, zeroIdxY + 1, zeroIdxY, zeroIdxY - 1};
-        for(int i = 0;i<tmpXs.length;i++){
+        for (int i = 0; i < tmpXs.length; i++) {
             tmpX = tmpXs[i];
             tmpY = tmpYs[i];
-            if(inBound(tmpX,tmpY)){
-                exchangeElement(zeroIdxX,zeroIdxY,tmpX,tmpY);
+            if(inBound(tmpX, tmpY)){
+                exchangeElement(zeroIdxX, zeroIdxY, tmpX, tmpY);
                 neighborBoards.add(new Board(mat));
-                exchangeElement(zeroIdxX,zeroIdxY,tmpX,tmpY);
+                exchangeElement(zeroIdxX, zeroIdxY, tmpX, tmpY);
             }
         }
         return neighborBoards;
     }
 
     // a board that is obtained by exchanging any pair of tiles
-    public Board twin(){
-        int x1=0,y1=0;
-        int x2=0,y2=0;
+    public Board twin() {
+        int x1 = 0, y1 = 0;
+        int x2 = 0, y2 = 0;
         int cnt = 0;
-        int x,y;
-        for(int i=0;i<n*n;i++){
+        int x, y;
+        for (int i = 0; i < n * n; i++) {
            x = i/n;
            y = i%n;
-           if(cnt == 0 && mat[x][y]!=0){x1=x;y1=y;cnt=1;continue;}
-           else if(cnt == 1 && mat[x][y]!=0){x2=x;y2=y;cnt=2;continue;}
-           else if(cnt == 2)break;
+           if (cnt == 0 && mat[x][y] != 0) {x1 = x; y1 = y; cnt = 1;}
+           else if (cnt == 1 && mat[x][y] != 0) {x2 = x; y2 = y; cnt = 2;}
+           else if (cnt == 2) {break;}
         }
-        exchangeElement(x1,y1,x2,y2);
+        exchangeElement(x1, y1, x2, y2);
         Board tmp = new Board(mat);
-        exchangeElement(x1,y1,x2,y2);
+        exchangeElement(x1, y1, x2, y2);
         return tmp;
     }
 
     // unit testing (not graded)
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("Board Unitest");
-        int [][] testMat = {{1,0,3},{4,2,5},{7,8,6}};
-        int [][] testMat2 = {{1,2,3},{4,5,6},{7,8,0}};
+        int [][] testMat = { {1,0,3}, {4,2,5}, {7,8,6}};
+        int [][] testMat2 = { {1,2,3}, {4,5,6}, {7,8,0}};
         Board board1 = new Board(testMat);
         Board board2 = new Board(testMat2);
         System.out.println("Dimension:" + board1.dimension());
         System.out.println("Expression:\n" + board1.toString());
         System.out.println("Hamming:" + board1.hamming());
-        System.out.println("Manhattan:"+ board1.manhattan());
-        System.out.println("Board1 IsGoal:"+board1.isGoal());
-        System.out.println("Board2 IsGoal:"+board2.isGoal());
-        System.out.println("Board1 == Board2:"+board1.equals(board2));
-        System.out.println("Board1 twin:\n"+board1.twin().toString());
+        System.out.println("Manhattan:" + board1.manhattan());
+        System.out.println("Board1 IsGoal:" + board1.isGoal());
+        System.out.println("Board2 IsGoal:" + board2.isGoal());
+        System.out.println("Board1 == Board2:" + board1.equals(board2));
+        System.out.println("Board1 twin:\n" + board1.twin().toString());
 
     }
 
