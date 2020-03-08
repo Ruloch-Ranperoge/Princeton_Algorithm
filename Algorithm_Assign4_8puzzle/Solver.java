@@ -8,60 +8,103 @@ public class Solver {
     private boolean solvebale;
     private final int cnt;
     private List<Board> sol;
+
+    private class SearchNode {
+        private final int moves;
+        private final int priority;
+        private Board board;
+        private SearchNode prev;
+
+        public SearchNode(int movesPara, Board boardPara, SearchNode prevPara) {
+            moves = movesPara;
+            board = boardPara;
+            priority = moves + board.manhattan();
+            prev = prevPara;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
+        public Board getBoard() {
+            return board;
+        }
+
+        public int getMoves() {
+            return moves;
+        }
+
+        public SearchNode getPrev() {
+            return prev;
+        }
+
+        public Iterable<SearchNode> getNeighborNodes() {
+            List<SearchNode> res = new ArrayList<>();
+            for (Board neigh:board.neighbors()) {
+                if ( prev == null || !neigh.equals(prev.getBoard())) {
+                    res.add(new SearchNode(moves + 1, neigh, this));
+                }
+            }
+            return res;
+        }
+    }
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
+        int tmpCnt = -1;
         if (initial == null) {
             throw new IllegalArgumentException("initial board is null");
         }
-        Comparator<Board> manhattanComparator = new Comparator<Board>() {
+        Comparator<SearchNode> manhattanComparator = new Comparator<SearchNode>() {
             @Override
-            public int compare(final Board b1, final Board b2) {
-                return b1.manhattan() - b2.manhattan();
+            public int compare(final SearchNode b1, final SearchNode b2) {
+                return b1.getPriority() - b2.getPriority();
             }
         };
-        MinPQ<Board> qMain = new MinPQ<>(manhattanComparator);
-        MinPQ<Board> qSub = new MinPQ<>(manhattanComparator);
+        MinPQ<SearchNode> qMain = new MinPQ<>(manhattanComparator);
+        MinPQ<SearchNode> qSub = new MinPQ<>(manhattanComparator);
 
-        qMain.insert(initial);
-        qSub.insert(initial.twin());
-        Board searchNodeMain;
-        Board searchNodeSub;
-        Board prevNodeMain = null;
-        Board prevNodeSub = null;
-        cnt = -1;
-        List<Board> solMain = new ArrayList<>();
-        List<Board> solSub = new ArrayList<>();
+        qMain.insert(new SearchNode(0, initial, null));
+        qSub.insert(new SearchNode(0, initial.twin(), null));
+        SearchNode searchNodeMain;
+        SearchNode searchNodeSub;
+        sol = new ArrayList<>();
+
         while (!qMain.isEmpty() && !qSub.isEmpty()) {
             searchNodeMain = qMain.delMin();
             searchNodeSub = qSub.delMin();
-            solMain.add(searchNodeMain);
-            solSub.add(searchNodeSub);
             // System.out.println(searchNodeMain.toString());
-            cnt++;
-            if (searchNodeMain.isGoal()) {
+            if (searchNodeMain.getBoard().isGoal()) {
                 solvebale = true;
-                sol = solMain;
+                SearchNode tmpNode = searchNodeMain;
+                while (tmpNode != null) {
+                    tmpCnt++;
+                    sol.add(tmpNode.getBoard());
+                    tmpNode = tmpNode.getPrev();
+                }
                 // System.out.println("Main solvable");
                 break;
             }
-            if (searchNodeSub.isGoal()) {
+            if (searchNodeSub.getBoard().isGoal()) {
                 solvebale = false;
-                sol = solSub;
+                SearchNode tmpNode = searchNodeSub;
+                while (tmpNode != null) {
+                    tmpCnt++;
+                    sol.add(tmpNode.getBoard());
+                    tmpNode = tmpNode.getPrev();
+                }
                 // System.out.println("Sub solvable");
                 break;
             }
-            for (Board neigh:searchNodeMain.neighbors()) {
-                if (neigh.equals(prevNodeMain)) continue;
+            for (SearchNode neigh:searchNodeMain.getNeighborNodes()) {
+                // System.out.println(neigh.getPrev().getBoard().toString());
                 qMain.insert(neigh);
             }
-            for (Board neigh:searchNodeSub.neighbors()) {
-                if (neigh.equals(prevNodeSub)) continue;
+            for (SearchNode neigh:searchNodeSub.getNeighborNodes()) {
                 qSub.insert(neigh);
             }
-            prevNodeMain = searchNodeMain;
-            prevNodeSub = searchNodeSub;
         }
 
+        cnt = tmpCnt;
     }
 
     // is the initial board solvable? (see below)
@@ -80,7 +123,7 @@ public class Solver {
     }
 
     // test client (see below)
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("Solver main");
     }
 

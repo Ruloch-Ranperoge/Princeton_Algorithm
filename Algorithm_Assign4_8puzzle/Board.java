@@ -46,12 +46,18 @@ public class Board {
         }
         manhattanDis = tmpManhattanDis;
 
+        int tmpZeroIdxX = 0;
+        int tmpZeroIdxY = 0;
+
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 if (mat[i][j] == 0) {
-                    zeroIdxX = i;
-                    zeroIdxY = j;
+                    tmpZeroIdxX = i;
+                    tmpZeroIdxY = j;
                 }
+
+        zeroIdxX = tmpZeroIdxX;
+        zeroIdxY = tmpZeroIdxY;
     }
 
     // string representation of this board
@@ -94,8 +100,8 @@ public class Board {
     // does this board equal y?
     public boolean equals(Object y) {
         Board tmpY;
-        if (y instanceof Board)
-            tmpY = (Board)y;
+        if (y.getClass() == Board.class)
+            tmpY = (Board) y;
         else
             return false;
         if (n != tmpY.dimension())
@@ -118,13 +124,13 @@ public class Board {
     // all neighboring boards
     public Iterable<Board> neighbors() {
         List<Board> neighborBoards = new ArrayList<>();
-        int tmpX,tmpY;
-        int [] tmpXs = {zeroIdxX - 1, zeroIdxX, zeroIdxX + 1, zeroIdxX};
-        int [] tmpYs = {zeroIdxY, zeroIdxY + 1, zeroIdxY, zeroIdxY - 1};
+        int tmpX, tmpY;
+        int [] tmpXs = { zeroIdxX - 1, zeroIdxX, zeroIdxX + 1, zeroIdxX };
+        int [] tmpYs = { zeroIdxY, zeroIdxY + 1, zeroIdxY, zeroIdxY - 1 };
         for (int i = 0; i < tmpXs.length; i++) {
             tmpX = tmpXs[i];
             tmpY = tmpYs[i];
-            if(inBound(tmpX, tmpY)){
+            if (inBound(tmpX, tmpY)) {
                 exchangeElement(zeroIdxX, zeroIdxY, tmpX, tmpY);
                 neighborBoards.add(new Board(mat));
                 exchangeElement(zeroIdxX, zeroIdxY, tmpX, tmpY);
@@ -142,9 +148,17 @@ public class Board {
         for (int i = 0; i < n * n; i++) {
            x = i / n;
            y = i % n;
-           if (cnt == 0 && mat[x][y] != 0) { x1 = x; y1 = y; cnt = 1; }
-           else if (cnt == 1 && mat[x][y] != 0) { x2 = x; y2 = y; cnt = 2; }
-           else if (cnt == 2) { break; }
+           if (cnt == 0 && mat[x][y] != 0) {
+               x1 = x;
+               y1 = y;
+               cnt = 1;
+           }
+           else if (cnt == 1 && mat[x][y] != 0) {
+               x2 = x;
+               y2 = y;
+               cnt = 2;
+           }
+           else if (cnt == 2) break;
         }
         exchangeElement(x1, y1, x2, y2);
         Board tmp = new Board(mat);
