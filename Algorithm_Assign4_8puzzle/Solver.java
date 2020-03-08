@@ -1,7 +1,6 @@
 import edu.princeton.cs.algs4.MinPQ;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -120,8 +119,11 @@ public class Solver {
 
     // sequence of boards in a shortest solution
     public Iterable<Board> solution() {
-        Collections.reverse(sol);
-        return sol;
+        List<Board> res = new ArrayList<>();
+        for (int i = sol.size() - 1; i >= 0; i--) {
+            res.add(sol.get(i));
+        }
+        return res;
     }
 
     // test client (see below)

@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab03fc44-1198-4408-aafc-2dbe32b8428e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/8puzzle.zip" beforeDir="false" afterPath="$PROJECT_DIR$/8puzzle.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Solver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Solver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/8puzzle.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$SearchNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver$SearchNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Algorithm_Assign4_8puzzle/Solver.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="121" selection-start-line="121" selection-end-line="121" />
+            <state relative-caret-position="374">
+              <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#595#596#0" expanded="true" />
@@ -58,8 +51,7 @@
                 <element signature="e#1765#1766#0" expanded="true" />
                 <element signature="e#3690#3691#0" expanded="true" />
                 <element signature="e#3792#3793#0" expanded="true" />
-                <element signature="e#3908#3909#0" expanded="true" />
-                <element signature="e#4034#4035#0" expanded="true" />
+                <element signature="e#4122#4123#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -249,8 +241,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="121" selection-start-line="121" selection-end-line="121" />
+        <state relative-caret-position="374">
+          <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#595#596#0" expanded="true" />
@@ -264,8 +256,7 @@
             <element signature="e#1765#1766#0" expanded="true" />
             <element signature="e#3690#3691#0" expanded="true" />
             <element signature="e#3792#3793#0" expanded="true" />
-            <element signature="e#3908#3909#0" expanded="true" />
-            <element signature="e#4034#4035#0" expanded="true" />
+            <element signature="e#4122#4123#0" expanded="true" />
           </folding>
         </state>
       </provider>
