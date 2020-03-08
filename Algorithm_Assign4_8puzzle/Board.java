@@ -1,14 +1,13 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Board {
     private int[][] mat;
-    private int n;
-    private int hammingDis;
-    private int manhattanDis;
-    private int zeroIdxX;
-    private int zeroIdxY;
+    private final int n;
+    private final int hammingDis;
+    private final int manhattanDis;
+    private final int zeroIdxX;
+    private final int zeroIdxY;
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
     public Board(int[][] tiles) {
@@ -26,27 +25,27 @@ public class Board {
             System.arraycopy(tiles[i], 0, mat[i], 0, tiles[i].length);
         }
 
-        hammingDis = 0;
+        int tmpHammingDis = 0;
         for (int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
+            for (int j = 0; j < n; j++) {
                 if (mat[i][j] != 0 && i * n + j + 1 != mat[i][j])
-                    hammingDis++;
+                    tmpHammingDis++;
             }
         }
+        hammingDis = tmpHammingDis;
 
         int tmpTarX, tmpTarY;
-        manhattanDis = 0;
+        int tmpManhattanDis = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (mat[i][j] == 0) continue;
-                tmpTarX = (mat[i][j] - 1)/n;
-                tmpTarY = (mat[i][j] - 1)%n;
-                manhattanDis += Math.abs(tmpTarX - i) + Math.abs(tmpTarY - j);
+                tmpTarX = (mat[i][j] - 1) / n;
+                tmpTarY = (mat[i][j] - 1) % n;
+                tmpManhattanDis += Math.abs(tmpTarX - i) + Math.abs(tmpTarY - j);
             }
         }
+        manhattanDis = tmpManhattanDis;
 
-        zeroIdxX = 0;
-        zeroIdxY = 0;
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 if (mat[i][j] == 0) {
@@ -141,11 +140,11 @@ public class Board {
         int cnt = 0;
         int x, y;
         for (int i = 0; i < n * n; i++) {
-           x = i/n;
-           y = i%n;
-           if (cnt == 0 && mat[x][y] != 0) {x1 = x; y1 = y; cnt = 1;}
-           else if (cnt == 1 && mat[x][y] != 0) {x2 = x; y2 = y; cnt = 2;}
-           else if (cnt == 2) {break;}
+           x = i / n;
+           y = i % n;
+           if (cnt == 0 && mat[x][y] != 0) { x1 = x; y1 = y; cnt = 1; }
+           else if (cnt == 1 && mat[x][y] != 0) { x2 = x; y2 = y; cnt = 2; }
+           else if (cnt == 2) { break; }
         }
         exchangeElement(x1, y1, x2, y2);
         Board tmp = new Board(mat);
@@ -156,8 +155,8 @@ public class Board {
     // unit testing (not graded)
     public static void main(String[] args) {
         System.out.println("Board Unitest");
-        int [][] testMat = { {1,0,3}, {4,2,5}, {7,8,6}};
-        int [][] testMat2 = { {1,2,3}, {4,5,6}, {7,8,0}};
+        int [][] testMat = { { 1, 0, 3 }, { 4, 2, 5 }, { 7, 8, 6 } };
+        int [][] testMat2 = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 0 } };
         Board board1 = new Board(testMat);
         Board board2 = new Board(testMat2);
         System.out.println("Dimension:" + board1.dimension());
