@@ -11,53 +11,53 @@ public class Board {
     private int zeroIdxY;
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
-    public Board(int[][] tiles){
+    public Board(int[][] tiles) {
         n = tiles.length;
-        if(n < 2){
+        if (n < 2) {
             throw new IllegalArgumentException("Array size should be greater than 1");
         }
-        if(n != tiles[0].length){
+        if (n != tiles[0].length) {
             throw new IllegalArgumentException("Row should be equal to column.");
         }
         mat = new int[n][n];
-        for(int i = 0;i<n;i++)
-            System.arraycopy(tiles[i],0,mat[i],0,tiles[i].length);
+        for (int i = 0; i < n; i++)
+            System.arraycopy(tiles[i], 0, mat[i], 0, tiles[i].length);
 
-        hammingDis=0;
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                if (mat[i][j]!=0 && i*n+j+1 != mat[i][j])
-                    hammingDis ++;
+        hammingDis = 0;
+        for (int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                if (mat[i][j] != 0 && i * n + j + 1 != mat[i][j])
+                    hammingDis++;
             }
         }
 
-        int tmpTarX,tmpTarY;
+        int tmpTarX, tmpTarY;
         manhattanDis = 0;
-        for(int i = 0;i<n;i++){
-            for(int j = 0;j<n;j++){
-                if(mat[i][j]==0)continue;
-                tmpTarX = (mat[i][j]-1)/n;
-                tmpTarY = (mat[i][j]-1)%n;
-                manhattanDis += Math.abs(tmpTarX-i) + Math.abs(tmpTarY-j);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 0)continue;
+                tmpTarX = (mat[i][j] - 1)/n;
+                tmpTarY = (mat[i][j] - 1)%n;
+                manhattanDis += Math.abs(tmpTarX - i) + Math.abs(tmpTarY - j);
             }
         }
 
-        zeroIdxX=0;
-        zeroIdxY=0;
-        for(int i=0;i<n;i++)
-            for(int j=0;j<n;j++)
-                if(mat[i][j]==0){
+        zeroIdxX = 0;
+        zeroIdxY = 0;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                if (mat[i][j] == 0) {
                     zeroIdxX = i;
                     zeroIdxY = j;
                 }
     }
 
     // string representation of this board
-    public String toString(){
+    public String toString() {
         StringBuilder expBuffer = new StringBuilder();
         expBuffer.append(n).append("\n");
-        for (int i = 0;i<n;i++){
-            for(int j=0;j<n;j++)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++)
                 expBuffer.append(" ").append(mat[i][j]);
             expBuffer.append("\n");
         }
@@ -66,49 +66,49 @@ public class Board {
     }
 
     // board dimension n
-    public int dimension(){
+    public int dimension() {
         return n;
     }
 
     // number of tiles out of place
-    public int hamming(){
+    public int hamming() {
         return hammingDis;
     }
 
     // sum of Manhattan distances between tiles and goal
-    public int manhattan(){
+    public int manhattan() {
         return manhattanDis;
     }
 
     // is this board the goal board?
-    public boolean isGoal(){
-        for(int i=0;i<n;i++)
-            for(int j=0;j<n;j++)
-                if(mat[i][j]!= 0 && i*n+j+1 != mat[i][j])
+    public boolean isGoal() {
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                if (mat[i][j] != 0 && i * n + j + 1 != mat[i][j])
                     return false;
         return true;
     }
 
     // does this board equal y?
-    public boolean equals(Object y){
+    public boolean equals(Object y) {
         Board tmpY;
-        if(y instanceof Board)
+        if (y instanceof Board)
             tmpY = (Board)y;
         else
             return false;
-        if (n!=tmpY.dimension())
+        if (n != tmpY.dimension())
             return false;
-        for(int i=0;i<n;i++)
-            for(int j=0;j<n;j++)
-                if(mat[i][j]!=tmpY.mat[i][j])
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                if (mat[i][j] != tmpY.mat[i][j])
                     return false;
         return true;
     }
 
-    private boolean inBound(int x,int y){
+    private boolean inBound(int x, int y) {
         return x < n && x >= 0 && y < n && y >= 0;
     }
-    private void exchangeElement(int x1, int y1, int x2, int y2){
+    private void exchangeElement(int x1, int y1, int x2, int y2) {
         int tmp = mat[x1][y1];
         mat[x1][y1] = mat[x2][y2];
         mat[x2][y2] = tmp;
