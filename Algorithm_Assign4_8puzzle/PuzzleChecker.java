@@ -44,7 +44,6 @@ public class PuzzleChecker {
                     tiles[i][j] = in.readInt();
                 }
             }
-
             // solve the slider puzzle
             Board initial = new Board(tiles);
             Solver solver = new Solver(initial);
