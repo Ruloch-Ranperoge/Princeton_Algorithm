@@ -86,7 +86,7 @@ public class KdTree {
             else return contains(node.right, p);
         }
         else {
-            if (p.x() <= node.point.x()) return contains(node.right, p);
+            if (p.x() <= node.point.x()) return contains(node.left, p);
             else return contains(node.right, p);
         }
     }
