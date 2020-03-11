@@ -67,7 +67,11 @@ public class KdTree {
         return node;
     }
     public void insert(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException("Point2D is NULL!");
+        }
         root = insert(root, p, true);
+        pointNumber += 1;
     }
 
     // does the set contain point p?
@@ -86,6 +90,9 @@ public class KdTree {
         }
     }
     public boolean contains(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException("Point2D is NULL!");
+        }
         return contains(root, p);
     }
 
@@ -134,11 +141,14 @@ public class KdTree {
     }
 
     public Iterable<Point2D> range(RectHV rect) {
+        if (rect == null) {
+            throw new IllegalArgumentException("RectHV is NULL");
+        }
         return range(rect, root, 0, 1, 0, 1);
     }
 
     // a nearest neighbor in the set to point p; null if the set is empty
-    public Point2D nearest (Node node, Point2D p, RectHV rect) {
+    private Point2D nearest (Node node, Point2D p, RectHV rect) {
         if (node == null) return null;
         Point2D pointMaj, pointMin = null;
         RectHV tmpRectMaj, tmpRectMin;
@@ -205,6 +215,9 @@ public class KdTree {
         }
     }
     public Point2D nearest(Point2D p) {
+        if (p == null) {
+            throw new IllegalArgumentException("Point2D is NULL!");
+        }
         return nearest(root, p, new RectHV(0, 0, 1, 1));
     }
 
