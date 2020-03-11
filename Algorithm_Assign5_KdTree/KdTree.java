@@ -46,8 +46,10 @@ public class KdTree {
     // add the point to the set (if it is not already in the set)
     private Node insert(Node node, Point2D p, boolean horver) {
         if (node == null) {
+            pointNumber += 1;
             return new Node(p, !horver);
         }
+        if (node.point.equals(p)) return node;
         if (node.horVer) {
             if (p.y() <= node.point.y()) {
                 node.left = insert(node.left, p, !horver);
@@ -71,7 +73,6 @@ public class KdTree {
             throw new IllegalArgumentException("Point2D is NULL!");
         }
         root = insert(root, p, true);
-        pointNumber += 1;
     }
 
     // does the set contain point p?
