@@ -8,9 +8,10 @@ import edu.princeton.cs.algs4.DirectedCycle;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class WordNet {
@@ -25,10 +26,9 @@ public class WordNet {
         }
     }
 
-    List<Synset> synsetList;
-    List<String> wordsList;
-    List<Integer> synsetId;
-    Digraph graph;
+    private List<Synset> synsetList;
+    private HashMap<String, List<Integer>> wordMap;
+    private Digraph graph;
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) {
         // NULL argument
@@ -37,31 +37,36 @@ public class WordNet {
         }
 
         synsetList = new ArrayList<>();
-        wordsList = new ArrayList<>();
-        synsetId = new ArrayList<>();
+        wordMap = new HashMap<>();
 
         // Read file
-        In synsetsFileIn = new In(new File(synsets));
+        In synsetsFileIn = new In(synsets);
         String line;
         while ((line = synsetsFileIn.readLine()) != null) {
             String [] splitted = line.split(",");
             int id = Integer.parseInt(splitted[0]);
             String [] synWords = splitted[1].split(" ");
             for (String s:synWords) {
-                wordsList.add(s);
-                synsetId.add(id);
+                if (wordMap.containsKey(s)) {
+                    wordMap.get(s).add(id);
+                }
+                else {
+                    wordMap.put(s, new ArrayList<>(Collections.singletonList(id)));
+                }
             }
             synsetList.add(new Synset(id, Arrays.asList(synWords)));
         }
 
         // judge rooted DAG
-        In hypernymsFileIn = new In(new File(hypernyms));
+        In hypernymsFileIn = new In(hypernyms);
+        // StdOut.print("V:" + synsetList.size()+"\n");
         graph = new Digraph(synsetList.size());
         while ((line = hypernymsFileIn.readLine()) != null) {
             String [] ids = line.split(",");
             int id = Integer.parseInt(ids[0]);
             for (int i = 1; i < ids.length; i++) {
                 graph.addEdge(id, Integer.parseInt(ids[i]));
+                // StdOut.print(id+ " "+Integer.parseInt(ids[i])+"\n");
             }
         }
 
@@ -75,22 +80,21 @@ public class WordNet {
 
     // returns all WordNet nouns
     public Iterable<String> nouns() {
-        return wordsList;
+        return wordMap.keySet();
     }
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
-        return wordsList.contains(word);
+        return wordMap.containsKey(word);
     }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
         // not a WordNet noun
-        if (!wordsList.contains(nounA)) throw new IllegalArgumentException("nounA is no in List");
-        if (!wordsList.contains(nounB)) throw new IllegalArgumentException("nounB is no in List");
-        int groupA = synsetId.get(wordsList.indexOf(nounA));
-        int groupB = synsetId.get(wordsList.indexOf(nounB));
-        StdOut.print(groupA + " " + groupB+ " ");
+        if (nounA == null || !wordMap.containsKey(nounA)) throw new IllegalArgumentException("nounA is no in List");
+        if (nounB == null || !wordMap.containsKey(nounB)) throw new IllegalArgumentException("nounB is no in List");
+        List<Integer> groupA = wordMap.get(nounA);
+        List<Integer> groupB = wordMap.get(nounB);
         SAP sap = new SAP(graph);
         return sap.length(groupA, groupB);
     }
@@ -99,18 +103,17 @@ public class WordNet {
     // in a shortest ancestral path (defined below)
     public String sap(String nounA, String nounB) {
         // not a WordNet noun
-        if (!wordsList.contains(nounA)) throw new IllegalArgumentException("nounA is no in List");
-        if (!wordsList.contains(nounB)) throw new IllegalArgumentException("nounB is no in List");
-
-        int groupA = synsetId.get(wordsList.indexOf(nounA));
-        int groupB = synsetId.get(wordsList.indexOf(nounB));
+        if (nounA == null || !wordMap.containsKey(nounA)) throw new IllegalArgumentException("nounA is no in List");
+        if (nounB == null || !wordMap.containsKey(nounB)) throw new IllegalArgumentException("nounB is no in List");
+        List<Integer> groupA = wordMap.get(nounA);
+        List<Integer> groupB = wordMap.get(nounB);
         SAP sap = new SAP(graph);
         return String.join(" ", synsetList.get(sap.ancestor(groupA, groupB)).words);
     }
 
     // do unit testing of this class
     public static void main(String[] args) {
-        WordNet wordNet = new WordNet("synsets6.txt", "hypernyms6TwoAncestors.txt");
-        StdOut.print(wordNet.distance("a", "c"));
+        WordNet wordNet = new WordNet("synsets100-subgraph.txt", "hypernyms100-subgraph.txt");
+        StdOut.print(wordNet.distance("thing", "prothrombin"));
     }
 }

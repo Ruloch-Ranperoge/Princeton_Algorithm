@@ -10,7 +10,7 @@ import edu.princeton.cs.algs4.StdOut;
  *  Description:
  **************************************************************************** */
 public class SAP {
-    Digraph graph;
+    private Digraph graph;
     // constructor takes a digraph (not necessarily a DAG)
     public SAP(Digraph G) {
         graph = new Digraph(G);
@@ -52,12 +52,15 @@ public class SAP {
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) throw new IllegalArgumentException();
+        BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(graph, v);
+        BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(graph, w);
         int minDis = -1;
-        for (int x:v) {
-            for (int y:w) {
-                int len = length(x, y);
-                if (minDis == -1 || len < minDis) {
-                    minDis = len;
+        for (int i = 0; i < graph.V(); i++) {
+            if (bfsV.hasPathTo(i) && bfsW.hasPathTo(i)) {
+                int dis = bfsV.distTo(i) + bfsW.distTo(i);
+                if (minDis == -1 || dis < minDis) {
+                    minDis = dis;
                 }
             }
         }
@@ -66,15 +69,17 @@ public class SAP {
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) throw new IllegalArgumentException();
+        BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(graph, v);
+        BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(graph, w);
         int minDis = -1;
         int minIdx = -1;
-        for (int x:v) {
-            for (int y:w) {
-                int len = length(x, y);
-                int idx = ancestor(x, y);
-                if (minDis == -1 || len < minDis) {
-                    minDis = len;
-                    minIdx = idx;
+        for (int i = 0; i < graph.V(); i++) {
+            if (bfsV.hasPathTo(i) && bfsW.hasPathTo(i)) {
+                int dis = bfsV.distTo(i) + bfsW.distTo(i);
+                if (minDis == -1 || dis < minDis) {
+                    minDis = dis;
+                    minIdx = i;
                 }
             }
         }
