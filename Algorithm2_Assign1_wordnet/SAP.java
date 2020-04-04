@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.BreadthFirstDirectedPaths;
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
@@ -9,21 +10,76 @@ import edu.princeton.cs.algs4.StdOut;
  *  Description:
  **************************************************************************** */
 public class SAP {
-
+    Digraph graph;
     // constructor takes a digraph (not necessarily a DAG)
-    public SAP(Digraph G)
+    public SAP(Digraph G) {
+        graph = new Digraph(G);
+    }
 
     // length of shortest ancestral path between v and w; -1 if no such path
-    public int length(int v, int w)
+    public int length(int v, int w) {
+        BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(graph, v);
+        BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(graph, w);
+        int minDis = -1;
+        for (int i = 0; i < graph.V(); i++) {
+            if (bfsV.hasPathTo(i) && bfsW.hasPathTo(i)) {
+                int dis = bfsV.distTo(i) + bfsW.distTo(i);
+                if (minDis == -1 || dis < minDis) {
+                    minDis = dis;
+                }
+            }
+        }
+        return minDis;
+    }
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
-    public int ancestor(int v, int w)
+    public int ancestor(int v, int w) {
+        BreadthFirstDirectedPaths bfsV = new BreadthFirstDirectedPaths(graph, v);
+        BreadthFirstDirectedPaths bfsW = new BreadthFirstDirectedPaths(graph, w);
+        int minDis = -1;
+        int minIdx = -1;
+        for (int i = 0; i < graph.V(); i++) {
+            if (bfsV.hasPathTo(i) && bfsW.hasPathTo(i)) {
+                int dis = bfsV.distTo(i) + bfsW.distTo(i);
+                if (minDis == -1 || dis < minDis) {
+                    minDis = dis;
+                    minIdx = i;
+                }
+            }
+        }
+        return minIdx;
+    }
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
-    public int length(Iterable<Integer> v, Iterable<Integer> w)
+    public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        int minDis = -1;
+        for (int x:v) {
+            for (int y:w) {
+                int len = length(x, y);
+                if (minDis == -1 || len < minDis) {
+                    minDis = len;
+                }
+            }
+        }
+        return minDis;
+    }
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
-    public int ancestor(Iterable<Integer> v, Iterable<Integer> w)
+    public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+        int minDis = -1;
+        int minIdx = -1;
+        for (int x:v) {
+            for (int y:w) {
+                int len = length(x, y);
+                int idx = ancestor(x, y);
+                if (minDis == -1 || len < minDis) {
+                    minDis = len;
+                    minIdx = idx;
+                }
+            }
+        }
+        return minIdx;
+    }
 
     // do unit testing of this class
     public static void main(String[] args) {
