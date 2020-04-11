@@ -32,3 +32,12 @@
  - Only one zero-outdegree vertex.
 15. Reachable vertex in Digragh
  - Topology sort
+ 16. MST
+ - Kruskal
+ - Prim
+ 17. Minmun Bottleneck Spanning Tree <- MST
+ 18. Is edge in SOME MST
+ - DFS(Judge cycle)
+ 19. Minimum-weight feedback edge set. A feedback edge set of a graph is a subset of edges that contains at least one edge from every cycle in the graph. If the edges of a feedback edge set are removed, the resulting graph is acyclic. Given an edge-weighted graph, design an efficient algorithm to find a feedback edge set of minimum weight. Assume the edge weights are positive.
+ - Run Kruskal with Max edge. All edges detected to form a loop will be added to minimum-weight feedback edge set.
+ 20. 
