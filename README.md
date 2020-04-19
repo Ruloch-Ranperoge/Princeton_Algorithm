@@ -47,3 +47,10 @@
  - Floyd. Try all intermediate nodes one by one.
  22. Shortest path with one skippable edge
  - For each edge (v,w), Min(SP(s,v)+SP(w,t))
+ 23. Fattest path. Fatness of a path is the bottleneck capacity of the path
+ - Modified Dijkstra. Replace shortest distance to fatness. Relax the vertex with the largest fatness.
+ - Complexity: Elog(E)
+ 24. Maximum weight closure problem. A subset of vertices S in a digraph iis closed if there are no edges pointing outside S. Given a digraph with weights(Positive or negative) on the vertices, find a closed subset of vertices of maximum total weight.
+ - Reconstruct the graph. Add source vertex S and terminal vertex T. If Wx > 0, add edge (S,x,Wx). If Wx < 0, add edge(x,T,-Wx). If edge(x,y), add edge (x,y,INF).
+ - Maxflow S->T. Maximum weigth closure = Sigma(Wx) - F (Wx > 0)
+ ![flow](http://gagguy.is-programmer.com/user_files/gagguy/Image/closure4.jpg)
